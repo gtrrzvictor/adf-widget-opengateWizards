@@ -1,0 +1,35 @@
+{
+    "name": "adf-widget-opengate-wizards",
+    "version": "0.0.0-0",
+    //    "main": "index.js",
+    "repository": "https://github.com/gtrrzvictor/adf-widget-opengateWizards.git",
+    "author": "Victor Gutierrez <victor.gutierrez@amplia.es>",
+    "license": "MIT",
+    "keywords": [
+        "dashboard",
+        "widget",
+        "adf",
+        "adf-widget"
+    ],
+    "description": "This widget will register a collection of wizards which it will be used by any registered user",
+    "dependencies": {
+        "angular-matrix": "1.2.x",
+        "css-loader": "^0.28.4",
+        "style-loader": "^0.18.2"
+    },
+    "scripts": {
+        "bundle": "webpack",
+        "register": "node scripts/register",
+        "update": "node scripts/update",
+        "delete": "node scripts/delete"
+    },
+    "devDependencies": {
+        "angular": "^1.6.5",
+        "html-loader": "^0.4.5",
+        "opengate-angular-dashboard-framework": "v2.4.x",
+        "opengate-angular-js": "v0.2.x",
+        "request": "^2.81.0",
+        "webpack": "^3.0.0",
+        "wiredep": "~2.2.2"
+    }
+}
