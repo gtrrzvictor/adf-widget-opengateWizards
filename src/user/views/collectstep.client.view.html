@@ -1,0 +1,88 @@
+<h4 class="modal-title">{{ wizardSteps.info.title }}
+        <i class="glyphicon glyphicon-info-sign popover-markdown" uib-popover-template="'user-form-info'" popover-trigger="'outsideClick'" popover-placement="auto bottom" popover-class="popover-markdown"></i>
+    </h4>
+<span class="text-info">{{ wizardSteps.info.description }}</span>
+<input type="hidden" id="idUserHost" ng-required="false" maxlength="255" ng-model="user.host">
+<div class="row">
+    <div class="col-md-6 col-xs-12">
+        <div class="form-group">
+            <label for="idUserName">Name</label>
+            <input class="form-control" type="text" id="idUserName" name="name" maxlength="255" ng-model="user.name">
+        </div>
+    </div>
+    <div class="col-md-6 col-xs-12">
+        <div class="form-group">
+            <label for="idUserSurname">Surname</label>
+            <input class="form-control" type="text" id="idUserSurname" name="surname" maxlength="50" ng-model="user.surname">
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-xs-12">
+        <div class="form-group">
+            <label for="idUserOrganization">Domain</label>
+            <input class="form-control" type="text" id="idUserOrganization" name="organization" ng-disabled="true" ng-required="true" maxlength="255" ng-model="user.organization">
+            <span class="help-inline" ng-show="stepForm.$invalid && stepForm.organization.$error.required">Domain is required</span>
+        </div>
+    </div>
+    <div class="col-md-6 col-xs-12">
+        <div class="form-group">
+            <label for="idUserWorkgroup">Workgroup</label>
+            <input class="form-control" type="text" id="idUserWorkgroup" name="workgroup" ng-disabled="true" ng-required="true" maxlength="255" ng-model="user.workgroup">
+            <span class="help-inline" ng-show="stepForm.$invalid && stepForm.workgroup.$error.required">Workgroup is required</span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group">
+            <label for="idUserEmail">Email</label>
+            <input class="form-control" type="text" id="idUserEmail" name="email" ng-required="true" ng-disabled="show_update" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" maxlength="255" ng-model="user.email">
+            <span class="help-inline" ng-show="stepForm.$invalid && stepForm.email.$error.required">Email is required</span>
+            <span class="help-inline" ng-show="stepForm.$invalid && stepForm.email.$error.pattern">Email address is not valid</span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group">
+            <label for="idUserDescription">Description</label>
+            <input class="form-control" type="text" id="idUserDescription" name="description" maxlength="255" ng-model="user.description">
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group">
+            <label for="userProfile">Profile</label>
+            <ui-select tagging="tagTransform" id="idUserProfile" ng-model="userProfile.selected" theme="bootstrap" allow-clear="true" required="true" on-select="selectProfile($select.selected)" on-remove="selectProfile()" title="Choose profile">
+                <ui-select-match placeholder="Choose profile" allow-clear="true">{{$select.selected}}
+                </ui-select-match>
+                <ui-select-choices repeat="userProfileTmp in userProfiles | filter: $select.search">
+                    <span ng-bind-html="userProfileTmp | highlight: $select.search">
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-xs-12">
+            <div class="form-group">
+                <label for="idUserPassword">Password</label>
+                <input class="form-control" type="password" id="idUserPassword" name="password" ng-required="true" maxlength="50" ng-model="user.password">
+                <span class="help-inline" ng-show="stepForm.$invalid && stepForm.password.$error.required">Password is required</span>
+        </div>
+    </div>
+    <div class="col-md-6 col-xs-12">
+        <div class="form-group">
+            <label for="idUserPasswordRepeat">Repeat password</label>
+            <input class="form-control" type="password" id="idUserPasswordRepeat" name="password_repeat" ng-required="true" maxlength="50" ng-model="user.password_repeat" compare-to="user.password">
+            <span class="help-inline" ng-show="stepForm.$invalid && stepForm.password_repeat.$error.compareTo">Password confirmation must match</span>
+        </div>
+    </div>
+</div>
+<wizard-log class="col-xs-12" bar="progressLog"></wizard-log>
+<div ng-include="'src/wizard.footer.client.view.html'"></div>
+<script type="text/ng-template" id="user-form-info">
+    <span btf-markdown ng-include="'doc/wizard/user/user-form-info.md'"></span>
+</script>

@@ -1,0 +1,24 @@
+<div class="form-group" ng-show="progressInfo.show">
+    <h6 ng-if="progressInfo.actions.length > 0"><strong>{{progressInfo.title}}</strong></h6>
+    <div>
+        <ul>
+            <li>
+                <span class="text-primary">Entire process</span>
+                <uib-progressbar class="{{(progressInfo.value === progressInfo.max) ? '' : 'progress-striped active'}}" max="progressInfo.max" value="progressInfo.value" type="{{ progressInfo.type }}">
+                    <i>{{ progressInfo.value }} / {{ progressInfo.max }}</i>
+                </uib-progressbar>
+            </li>
+            <li ng-repeat="partialTmp in partialInfo track by $index">
+                <span class="text-primary">{{ partialTmp.name }}</span>
+                <uib-progressbar class="{{(partialTmp.value === partialTmp.max) ? '' : 'progress-striped active'}}" max="partialTmp.max" value="partialTmp.value" type="{{partialTmp.type}}">
+                    <i>{{ partialTmp.value }} / {{ partialTmp.max }}</i>
+                </uib-progressbar>
+            </li>
+        </ul>
+    </div>
+    <ul ng-if="progressInfo.actions.length > 0">
+        <li ng-repeat="entry in progressInfo.actions" class="text-{{entry.type}}">
+            <strong>{{ entry.msg }}</strong>
+        </li>
+    </ul>
+</div>

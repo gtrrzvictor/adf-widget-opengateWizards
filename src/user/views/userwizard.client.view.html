@@ -1,0 +1,19 @@
+<h3>{{ wizard.title }}
+            <i class="glyphicon glyphicon-info-sign popover-markdown" uib-popover-template="'user-create-info'" popover-trigger="'outsideClick'" popover-placement="autobottom" popover-class="popover-markdown large"></i>
+        </h3>
+<form name="userWizardForm" novalidate>
+    <wizard hide-indicators="true" edit-mode="wizard.close || wizard.editMode" indicators-position="top" on-finish="finishedWizard()">
+        <div class="wizard-content">
+            <div ng-controller="UserStepCollectController">
+                <ng-form class="form-horizontal" name="stepForm">
+                    <wz-step wz-title="{{ wizardSteps.info.title }}" description="{{ wizardSteps.info.description }}" canenter="enterValidation" canexit="exitValidation" wz-disabled="{{ wizardSteps.info.disabled }}" wz-order="1">
+                        <div ng-include="'src/user/views/collectstep.client.view.html'"></div>
+                    </wz-step>
+                </ng-form>
+            </div>
+        </div>
+    </wizard>
+</form>
+<script type="text/ng-template" id="user-create-info">
+    <span btf-markdown ng-include="'doc/wizard/user/user-wizard-info.md'"></span>
+</script>
