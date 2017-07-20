@@ -13,7 +13,6 @@ _wizard.controller('WizardController', ['$rootScope', '$scope', 'catalogs', 'toa
             hide: false
         };
 
-
         $scope.show_reset = true;
         $scope.show_cancel = true;
         $scope.show_previous = false;
