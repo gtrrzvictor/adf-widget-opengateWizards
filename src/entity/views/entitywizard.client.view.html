@@ -1,0 +1,37 @@
+<h3>{{wizard.title}}</h3>
+<form name="entityWizardForm" novalidate>
+    <wizard hide-indicators="wizard.hide" edit-mode="wizard.close || wizard.editMode" indicators-position="top" on-finish="finishedWizard()">
+        <div class="wizard-content">
+            <ng-form class="form-horizontal" name="stepForm" ng-controller="StepDeviceEntityController">
+                <wz-step wz-title="{{step.entity.title}}" canexit="exitValidation" wz-disabled="{{step.entity.disabled}}">
+                    <div ng-include src="step.entity.body"></div>
+                </wz-step>
+            </ng-form>
+            <ng-form class="form-horizontal" name="stepForm" ng-controller="StepDeviceAdminController">
+                <wz-step wz-title="{{step.admin.title}}" canexit="exitValidation" wz-disabled="{{step.admin.disabled}}">
+                    <div ng-include src="step.admin.body"></div>
+                </wz-step>
+            </ng-form>
+            <ng-form class="form-horizontal" name="stepForm" ng-controller="StepDeviceInventoryController">
+                <wz-step wz-title="{{step.inventory.title}}" canexit="exitValidation" wz-disabled="{{step.inventory.disabled}}">
+                    <div ng-include src="step.inventory.body"></div>
+                </wz-step>
+            </ng-form>
+            <ng-form class="form-horizontal" name="stepForm" ng-controller="StepDeviceLocationController">
+                <wz-step wz-title="{{step.location.title}}" canexit="exitValidation" canenter="enterValidation" wz-disabled="{{step.location.disabled}}">
+                    <div ng-include src="step.location.body"></div>
+                </wz-step>
+            </ng-form>
+            <ng-form class="form-horizontal" name="stepForm" ng-controller="StepDeviceSecurityController">
+                <wz-step wz-title="{{step.security.title}}" canexit="exitValidation" wz-disabled="{{step.security.disabled}}">
+                    <div ng-include src="step.security.body"></div>
+                </wz-step>
+            </ng-form>
+            <ng-form class="form-horizontal" name="stepForm" ng-controller="StepDeviceRelationController">
+                <wz-step wz-title="{{step.relation.title}}" canexit="exitValidation" canenter="enterValidation" wz-disabled="{{step.relation.disabled}}">
+                    <div ng-include src="step.relation.body"></div>
+                </wz-step>
+            </ng-form>
+        </div>
+    </wizard>
+</form>

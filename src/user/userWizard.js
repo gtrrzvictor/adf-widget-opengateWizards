@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('adf.widget.opengateWizards', ['adf.provider'])
+angular.module('adf.widget.opengateWizards')
     .config(function(dashboardProvider) {
         dashboardProvider
             .widget('userWizard', {
@@ -23,9 +23,9 @@ angular.module('adf.widget.opengateWizards', ['adf.provider'])
         });
     });
 
+require('./service/userwizard.service');
+
 require('./views/collectstep.client.view.html');
-require('../wizard.footer.client.view.html');
-require('../wizard.log.client.view.html');
 
 require('../basewizard.client.controller');
 require('./controllers/userwizard.client.controller');

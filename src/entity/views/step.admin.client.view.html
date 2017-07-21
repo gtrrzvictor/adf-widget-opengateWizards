@@ -1,0 +1,76 @@
+<h4 class="modal-title">{{ step.admin.name }}
+        <i class="glyphicon glyphicon-info-sign popover-markdown" uib-popover-template="'info-admin'" popover-trigger="'outsideClick'" popover-placement="bottom" popover-class="popover-markdown large"></i>
+    </h4>
+<span class="text-info">{{ step.admin.description }}</span>
+<fieldset>
+    <div class="col-xs-12">
+        <div class="form-group">
+            <label for="identifier">Unique identifier of entity</label>
+            <input name="identifier" type="text" name="identifier" class="form-control" ng-model="entity.admin.id" ng-required="true" ng-disabled="show_update">
+            <span class="help-inline" ng-show="stepForm.$invalid && stepForm.identifier.$error.required">Identifier is required</span>
+        </div>
+    </div>
+    <div class="col-xs-12 col-md-6">
+        <div class="form-group">
+            <label for="organization">Organization</label>
+            <ui-select name="organization" ng-if="!show_update" tagging="tagTransform" ng-model="entity.organization.selected" theme="bootstrap" allow-clear="true" title="Choose an organization" ng-required="true" on-select="changeChannels($item)" on-remove="removeChannels($item)">
+                <ui-select-match placeholder="Choose an organization" allow-clear="true">{{$select.selected.name}}</ui-select-match>
+                <ui-select-choices repeat="organization in organizations | filter: $select.search">
+                    <span ng-bind-html="organization.name | highlight: $select.search">
+                </ui-select-choices>
+            </ui-select>
+            <span class="help-inline" ng-show="stepForm.$invalid && stepForm.organization.$error.required">Organization is required</span>
+                    <input name="organization" type="text" class="form-control" ng-model="entity.organization.selected.name" ng-required="true" ng-if="show_update" ng-disabled="true">
+        </div>
+    </div>
+    <div class="col-xs-12 col-md-6">
+        <div class="form-group">
+            <label for="channel">Channel</label>
+            <ui-select name="channel" ng-if="!show_update" tagging="tagTransform" ng-model="entity.channel.selected" theme="bootstrap" allow-clear="true" ng-required="true" title="Choose a channel">
+                <ui-select-match placeholder="Choose a channel" allow-clear="true">{{$select.selected.name}}
+                </ui-select-match>
+                <ui-select-choices repeat="channel in channels | filter: $select.search">
+                    <span ng-bind-html="channel.name | highlight: $select.search">
+                </ui-select-choices>
+            </ui-select>
+                            <span class="help-inline" ng-show="stepForm.$invalid && stepForm.channel.$error.required">Channel is required</span>
+                    <input name="channel" type="text" class="form-control" ng-model="entity.channel.selected.name" ng-required="true" ng-if="show_update" ng-disabled="true">
+        </div>
+    </div>
+    <div class="col-xs-12">
+        <div class="form-group">
+            <label for="admin.defaultFeed">Default Feed (Optional)</label>
+            <input name="admin.defaultFeed" type="text" class="form-control" ng-model="entity.admin.defaultFeed">
+        </div>
+    </div>
+    <div class="col-xs-12">
+        <div class="form-group">
+            <label for="administrativeState">Administrative State</label>
+            <ui-select name="administrativeState" tagging="tagTransform" ng-model="entity.administrativeState.selected" theme="bootstrap" allow-clear="true" title="Choose an administrative state (optional)">
+                <ui-select-match placeholder="Choose an administrative state (optional)" allow-clear="true">{{$select.selected.id}}
+                </ui-select-match>
+                <ui-select-choices repeat="administrativeState in administrativeStateCollection | filter: $select.search">
+                    <div><span ng-bind-html="administrativeState.id | highlight: $select.search"></span></div>
+                    <div>-<span ng-bind-html="administrativeState.description | highlight: $select.search"></span></div>
+                </ui-select-choices>
+            </ui-select>
+        </div>
+    </div>
+    <div class="col-xs-12">
+        <div class="form-group" ng-if="show_operational_status">
+            <label for="operationalStatus">Operational Status</label>
+            <ui-select name="operationalStatus" tagging="tagTransform" ng-model="entity.operationalStatus.selected" theme="bootstrap" allow-clear="true" title="Choose an operational status (optional)">
+                <ui-select-match placeholder="Choose an operational status (optional)" allow-clear="true">{{$select.selected | humanize}}
+                </ui-select-match>
+                <ui-select-choices repeat="operationalStatus in optStatusCollection | filter: $select.search">
+                    {{operationalStatus | humanize}}
+                </ui-select-choices>
+            </ui-select>
+        </div>
+    </div>
+    <wizard-log class="col-xs-12" bar="progressLog"></wizard-log>
+</fieldset>
+<div ng-include="'src/wizard.footer.client.view.html'"></div>
+<script type="text/ng-template" id="info-admin">
+    <div btf-markdown ng-include="'doc/wizard/entity/admin-info.md'"></div>
+</script>

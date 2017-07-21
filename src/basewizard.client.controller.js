@@ -4,7 +4,7 @@ var _wizard = angular.module('wizard');
 
 _wizard.controller('WizardController', ['$rootScope', '$scope', 'catalogs', 'toastr', 'WizardHandler',
     function($rootScope, $scope, catalogs, toastr, WizardHandler) {
-
+        $scope.$resolve = {};
         //darle valor a estas variables a traves de funciones propias de este controlador
         $scope.wizard = {
             title: 'Wizard',

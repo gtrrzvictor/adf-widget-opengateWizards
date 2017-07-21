@@ -1,0 +1,84 @@
+<h4 class="modal-title">{{ step.relation.name }}
+        <i class="glyphicon glyphicon-info-sign popover-markdown" uib-popover-template="'info-relations'" popover-trigger="'outsideClick'" popover-placement="bottom" popover-class="popover-markdown large"></i>
+    </h4>
+<span class="text-info">{{ step.relation.description }}</span>
+<fieldset>
+    <div class="form-group">
+        <table class="table table-condensed">
+            <thead>
+                <th>Type</th>
+                <th>Modules</th>
+                <th></th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="communicationsInterface in entity.communicationsInterfaces track by $index">
+                    <td ng-repeat="(type, modules) in communicationsInterface track by $index">{{type | communicationsInterface}}</td>
+                    <td ng-repeat="(type, modules) in communicationsInterface track by $index">
+                        <table>
+                            <tr ng-repeat="(module_key, params) in modules">
+                                <td>
+                                    <span uib-dropdown on-toggle="toggled(open)">
+                                    <a id="{{type}}_{{$index}}" class="pointer" uib-dropdown-toggle>{{module_key | communicationsInterface}}</a>
+                                    <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="{{type}}_{{$index}}">
+                                        <li ng-repeat="param in params">
+                                            <a href ng-if="param.parameter !== 'SOFTWARE' && param.parameter !== 'HARDWARE' && param.value">{{param.parameter | communicationsInterface}}: {{param.value}}</a>
+                                            <a href ng-if="param.parameter === 'SOFTWARE'">{{param.parameter | communicationsInterface}}: {{param.value.name}} - {{param.value.version}}</a>
+                                            <a href ng-if="param.parameter === 'HARDWARE'">{{param.parameter | communicationsInterface}}: {{param.value.manufacturer.name}} - {{param.value.model.name}} - {{param.value.model.version}}</a>
+                                        </li>
+                                    </ul>
+                                    </span>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td>
+                        <a ng-if="!wizard.disable" ng-click="removeCommunicationsModule($index, communicationsInterface)" class="pointer"><i class="fa fa-minus" aria-hidden="true"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="form-group" ng-if="!wizard.disable">
+        <button type="button" id="add_comms_module" ng-click="addCommunicationsModule()" class="btn btn-default ux-txt-success">Add</button>
+    </div>
+</fieldset>
+<div class="col-xs-12">
+    <wizard-log bar="progressLog"></wizard-log>
+</div>
+<script type="text/ng-template" id="communications_module_form.html">
+    <ng-form class="form-horizontal" name="communicationsModuleForm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Communications interface (optional)</h4>
+            </div>
+            <div class="modal-body">
+                <fieldset class="col-xs-12">
+                    <div class="form-group">
+                        <ui-select tagging="tagTransform" ng-model="commsModuleType.selected" theme="bootstrap" title="Choose a communications interface" on-select="changeCommsModuleType(commsModuleType.selected)" on-remove="removeCommsModuleType()" required="required">
+                            <ui-select-match allow-clear="true" placeholder="Choose a communications interface">
+                                {{$select.selected.name === 'Loading...' ? $select.selected.name : $select.selected.key}}
+                            </ui-select-match>
+                            <ui-select-choices repeat="commsModuleType as (key, commsModuleType) in commsModuleTypeCollection | filter: {key:$select.search}">
+                                <div>
+                                    <span ng-bind-html="commsModuleType.key | highlight: $select.search"></span>
+                                </div>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                    <div ng-repeat="(key, value) in communicationsInterface">
+                        <h4>{{key | communicationsInterface}}</h4>
+                        <wizard-parameter parameters="value"></wizard-parameter>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success ux-txt-success finish" ng-click="add()" ng-disabled="communicationsModuleForm.$invalid || wizardScope.wizard.disable">Add</button>
+                <button type="submit" class="btn btn-warning ux-txt-warning finish" ng-click="cancel()" ng-disabled="wizardScope.wizard.disable">Cancel</button>
+            </div>
+        </div>
+    </ng-form>
+</script>
+<div ng-include="'src/wizard.footer.client.view.html'"></div>
+<script type="text/ng-template" id="info-relations">
+    <div btf-markdown ng-include="'doc/wizard/entity/relations-info.md'"></div>
+</script>

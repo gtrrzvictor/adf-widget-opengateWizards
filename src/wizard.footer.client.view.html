@@ -1,23 +1,19 @@
-<!-- 
-<div>
+<!--<div>
     <button type="submit" class="btn btn-danger ux-txt-danger reset" ng-if="show_reset && !wizard.close" wz-reset="reset()" ng-disabled="!!wizard.disable">Reset</button>
     <button type="submit" class="btn btn-warning ux-txt-warning cancel" ng-if="show_cancel && !wizard.close" wz-cancel="cancel()" ng-disabled="!!wizard.disable">{{ isEditMode()?'Close': 'Cancel' }}</button>
-    <button type="submit" class="btn btn-default ux-txt-success previous" ng-if="show_previous && !wizard.close" wz-previous="previous()" ng-disabled="!!wizard.disable">Previous</button>
     <button type="submit" class="btn btn-primary ux-txt-success execute" ng-if="show_execute &&!wizard.close" wz-finish="execute()" ng-disabled="stepForm.$invalid || isInvalid() || !!wizard.disable">Execute</button>
     <button type="submit" class="btn btn-primary ux-txt-success update" ng-if="show_update && !wizard.close" wz-finish="update()" ng-disabled="stepForm.$invalid || isInvalid() ||  !!wizard.disable">Update</button>
     <button type="submit" class="btn btn-primary ux-txt-success clone" ng-if="show_clone && !wizard.close" ng-click="clone()" ng-disabled="stepForm.$invalid || isInvalid() ||  !!wizard.disable">Clone</button>
     <button type="submit" class="btn btn-success ux-txt-success finish" ng-if="wizard.close" ng-click="confirm()" id="idCloseWizard" ng-disabled="!!wizard.disable">Close</button>
-    <button type="submit" class="btn btn-primary ux-txt-success next" ng-if="show_next && !wizard.close" wz-next="next()" ng-disabled="stepForm.$invalid || isInvalid() ||  !!wizard.disable">Next</button>
 </div>
--->
-<!--
+
 <div>
     <button type="submit" class="btn btn-primary ux-txt-success save" ng-if="editMode()" wz-finish="saveTemplate()" ng-disabled="stepForm.$invalid || isInvalid()">Save template</button>
 </div>
 -->
-<div ng-if="!isEditMode()">
-    <button type="submit" class="btn btn-danger ux-txt-danger reset" ng-click="clearProgressLog()" ng-disabled="!!wizard.disable">Clear Log</button>
-    <button type="submit" class="btn btn-danger ux-txt-danger reset" ng-click="reset()" ng-disabled="!!wizard.disable">Reset Values</button>
-    <button type="submit" class="btn btn-primary ux-txt-success execute" ng-click="execute()" ng-disabled="stepForm.$invalid || isInvalid() || !!wizard.disable">Create</button>
-    <button type="submit" class="btn btn-primary ux-txt-success execute" ng-click="update()" ng-disabled="stepForm.$invalid || isInvalid() || !!wizard.disable">Update</button>
-</div>
+<button type="submit" class="btn btn-default ux-txt-success previous" wz-previous="previous()" ng-disabled="!!wizard.disable">Previous</button>
+<button type="submit" class="btn btn-primary ux-txt-success next" wz-next="next()" ng-disabled="stepForm.$invalid || isInvalid() ||  !!wizard.disable">Next</button>
+<button ng-if="!isEditMode()" type="submit" class="btn btn-danger ux-txt-danger reset" ng-click="clearProgressLog()" ng-disabled="!!wizard.disable">Clear Log</button>
+<button ng-if="!isEditMode()" type="submit" class="btn btn-danger ux-txt-danger reset" ng-click="reset()" ng-disabled="!!wizard.disable">Reset Values</button>
+<button ng-if="!isEditMode()" type="submit" class="btn btn-primary ux-txt-success execute" ng-click="execute()" ng-disabled="stepForm.$invalid || isInvalid() || !!wizard.disable">Create</button>
+<button ng-if="!isEditMode()" type="submit" class="btn btn-primary ux-txt-success execute" ng-click="update()" ng-disabled="stepForm.$invalid || isInvalid() || !!wizard.disable">Update</button>

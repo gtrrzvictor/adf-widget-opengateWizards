@@ -1,0 +1,13 @@
+<h4 class="modal-title"> {{ step.entity.name }}
+        <i class="glyphicon glyphicon-info-sign popover-markdown" uib-popover-template="'info-entity'" popover-trigger="'outsideClick'" popover-placement="bottom" popover-class="popover-markdown large"></i>
+    </h4>
+<span class="text-info">{{ step.entity.description }}</span>
+<fieldset>
+    <div class="form-group">
+        <wizard-radio info="entity.entities"></wizard-radio>
+    </div>
+</fieldset>
+<div ng-include="'src/wizard.footer.client.view.html'"></div>
+<script type="text/ng-template" id="info-entity">
+    <div btf-markdown ng-include="'doc/wizard/entity/entity-info.md'"></div>
+</script>

@@ -1,0 +1,25 @@
+<h4 class="modal-title">{{ step.inventory.name }}
+        <i class="glyphicon glyphicon-info-sign popover-markdown" uib-popover-template="'info-inventory'" popover-trigger="'outsideClick'" popover-placement="bottom" popover-class="popover-markdown large"></i>
+    </h4>
+<span class="text-info">{{ step.inventory.description }}</span>
+<fieldset>
+    <div class="col-xs-12">
+        <div class="form-group">
+            <label for="name">Name of entity (optional)</label>
+            <input name="name" type="text" class="form-control" ng-model="entity.inventory.name">
+        </div>
+        <div class="form-group">
+            <label for="description">Description of entity (optional)</label>
+            <input name="description" type="text" class="form-control" ng-model="entity.inventory.description">
+        </div>
+        <div class="form-group" ng-if="show_serial_number">
+            <label for="serialNumber">Serial number (optional)</label>
+            <input name="serialNumber" type="text" class="form-control" ng-model="entity.inventory.serialNumber">
+        </div>
+    </div>
+    <wizard-log class="col-xs-12" bar="progressLog"></wizard-log>
+</fieldset>
+<div ng-include="'src/wizard.footer.client.view.html'"></div>
+<script type="text/ng-template" id="info-inventory">
+    <div btf-markdown ng-include="'doc/wizard/entity/inventory-info.md'"></div>
+</script>

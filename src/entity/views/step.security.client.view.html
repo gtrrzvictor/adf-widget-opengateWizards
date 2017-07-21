@@ -1,0 +1,39 @@
+<h4 class="modal-title">{{ step.security.name }}
+        <i class="glyphicon glyphicon-info-sign popover-markdown" uib-popover-template="'info-security'" popover-trigger="'outsideClick'" popover-placement="bottom" popover-class="popover-markdown large"></i>
+    </h4>
+<span class="text-info">{{ step.security.description }}</span>
+<fieldset>
+    <div class="col-xs-12">
+        <div class="form-group">
+            <label for="trustedboot">Trusted boot (optional)</label>
+            <input name="trustedboot" type="text" class="form-control" ng-model="entity.security.trustedBoot" placeholder="Enter a new trusted boot to update">
+        </div>
+    </div>
+    <div class="col-xs-12">
+        <div class="form-group" mass-autocomplete>
+            <label for="certificate">Certificates</label>
+            <ui-select ng-model="entity.certificate.selected" theme="bootstrap" multiple="true" title="Choose a certificate" custom-ui-select-config="config_select_certificate" custom-ui-select custom-mass-autocomplete-item="config_mass_autocomplete_certificate">
+                <ui-select-match placeholder="Choose a certificate" allow-clear="true">
+                    {{$item.name === 'Loading...' ? $item.name : $item.name + ' - ' + $item.version}}
+                </ui-select-match>
+                <ui-select-choices repeat="certificate in certificateCollection track by $index">
+                    <div>
+                        <span ng-bind-html="certificate.name | highlight: $select.search"></span> -
+                        <span ng-bind-html="''+certificate.version| highlight: $select.search"></span>
+                    </div>
+                    <small>
+                        id: <span ng-bind-html="certificate.id | highlight: $select.search"></span><p></p>
+                        State: <span ng-bind-html="certificate.administrativeState |humanize | highlight: $select.search"></span>
+                        Serial Number: <span ng-bind-html="certificate.serialNumber | highlight: $select.search"></span><p></p>
+                        Valid: from <span ng-bind-html="certificate.valid.from | highlight: $select.search"></span> until <span ng-bind-html="certificate.valid.until | highlight: $select.search"></span><p></p>
+                    </small>
+                </ui-select-choices>
+            </ui-select>
+        </div>
+    </div>
+    <wizard-log class="col-xs-12" bar="progressLog"></wizard-log>
+</fieldset>
+<div ng-include="'src/wizard.footer.client.view.html'"></div>
+<script type="text/ng-template" id="info-security">
+    <div btf-markdown ng-include="'doc/wizard/entity/security-info.md'"></div>
+</script>
