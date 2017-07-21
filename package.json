@@ -14,14 +14,16 @@
     "dependencies": {},
     "scripts": {
         "bundle": "webpack",
-        "register": "node scripts/register",
+        "publish": "node scripts/register",
         "update": "node scripts/update",
+        "setaction": "node scripts/setaction",
         "delete": "node scripts/delete"
     },
     "devDependencies": {
         "angular": "^1.6.5",
         "angular-templatecache-loader": "^0.2.0",
         "css-loader": "^0.28.4",
+        "merge": "^1.2.0",
         "opengate-angular-dashboard-framework": "v2.4.x",
         "opengate-angular-js": "v0.2.x",
         "request": "^2.81.0",

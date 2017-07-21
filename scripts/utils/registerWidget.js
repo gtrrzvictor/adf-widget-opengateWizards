@@ -18,6 +18,16 @@ module.exports.delete = function(config, sessionId) {
     delete_req.end();
 }
 
+module.exports.setAction = function(config, sessionId) {
+    var requestConfig = {
+        url: 'http://' + config.host + ':' + config.port + '/api/workspaces/' + config.workspace + '/widgetByAction/' + config.actionName,
+        headers: {
+            "Cookie": [sessionId]
+        }
+    };
+    Request.call(request.post(requestConfig)).form().append('widgetName', config.widgetName);
+}
+
 function createForm(request) {
     var form = request.form();
     form.append('bundle', fs.createReadStream(process.cwd() + '/build/bundle.js'));
