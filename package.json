@@ -21,12 +21,12 @@
     "devDependencies": {
         "angular": "^1.6.5",
         "angular-templatecache-loader": "^0.2.0",
+        "css-loader": "^0.28.4",
         "opengate-angular-dashboard-framework": "v2.4.x",
         "opengate-angular-js": "v0.2.x",
         "request": "^2.81.0",
+        "style-loader": "^0.18.2",
         "webpack": "^3.0.0",
-        "wiredep": "~2.2.2",
-        "css-loader": "^0.28.4",
-        "style-loader": "^0.18.2"
+        "wiredep": "~2.2.2"
     }
 }
